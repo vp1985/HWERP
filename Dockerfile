@@ -9,7 +9,7 @@ RUN uv pip install \
     --python /home/frappe/frappe-bench/env/bin/python \
     --no-deps \
     /home/frappe/frappe-bench/apps/hwerp \
-    && (grep -qxF hwerp /home/frappe/frappe-bench/sites/apps.txt \
-        || printf '%s\n' hwerp >> /home/frappe/frappe-bench/sites/apps.txt)
+    && /home/frappe/frappe-bench/env/bin/python -B -m hwerp.image_setup \
+        /home/frappe/frappe-bench/sites/apps.txt
 
 WORKDIR /home/frappe/frappe-bench
