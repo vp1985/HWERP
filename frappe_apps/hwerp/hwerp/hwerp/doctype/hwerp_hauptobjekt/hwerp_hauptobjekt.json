@@ -1,0 +1,118 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "object_id",
+  "object_type",
+  "description",
+  "item",
+  "asset",
+  "reference_doctype",
+  "reference_name",
+  "external_resource_id",
+  "serial_number",
+  "object_snapshot",
+  "sort_order",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "object_id",
+   "fieldtype": "Data",
+   "label": "Objekt-ID",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1,
+   "no_copy": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "object_type",
+   "fieldtype": "Select",
+   "label": "Objektart",
+   "reqd": 1,
+   "options": "HWERP Technikobjekt\nERPNext Item\nEigenes ERPNext Asset\nKundenasset\nMietasset\nExternes Mietmittel\nFreies technisches Objekt",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Bezeichnung",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_global_search": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item",
+   "search_index": 1
+  },
+  {
+   "fieldname": "asset",
+   "fieldtype": "Link",
+   "label": "Asset",
+   "options": "Asset",
+   "search_index": 1
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "label": "HWERP-Referenztyp",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "label": "HWERP-Referenz",
+   "options": "reference_doctype"
+  },
+  {
+   "fieldname": "external_resource_id",
+   "fieldtype": "Data",
+   "label": "Externe Ressourcen-ID",
+   "search_index": 1
+  },
+  {
+   "fieldname": "serial_number",
+   "fieldtype": "Data",
+   "label": "Seriennummer"
+  },
+  {
+   "fieldname": "object_snapshot",
+   "fieldtype": "Link",
+   "label": "Objektsnapshot",
+   "options": "HWERP Kalkulationssnapshot",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "Reihenfolge",
+   "default": "0"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Bemerkung"
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Hauptobjekt",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "editable_grid": 1,
+ "istable": 1
+}

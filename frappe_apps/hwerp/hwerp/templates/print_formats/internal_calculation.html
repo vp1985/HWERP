@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <style>
+    @page { size: A4; margin: 18mm 14mm 16mm; }
+    body { font-family: Arial, sans-serif; color: #172033; font-size: 9pt; }
+    h1 { margin: 0 0 4mm; font-size: 18pt; color: #172033; }
+    h2 { margin: 7mm 0 2mm; font-size: 12pt; }
+    .meta { display: table; width: 100%; border-collapse: collapse; }
+    .meta-row { display: table-row; }
+    .meta-label, .meta-value { display: table-cell; padding: 1.3mm 2mm; border-bottom: 1px solid #e5e8ee; }
+    .meta-label { width: 32%; color: #596579; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #172033; color: white; text-align: left; padding: 1.8mm; }
+    td { padding: 1.6mm 1.8mm; border-bottom: 1px solid #e5e8ee; vertical-align: top; }
+    .number { text-align: right; white-space: nowrap; }
+    .warning { margin: 4mm 0; padding: 3mm; border-left: 3px solid #d7881d; background: #fff7e8; }
+    .totals { margin-left: auto; width: 58%; }
+    .totals td:first-child { color: #596579; }
+    .totals tr:last-child td { font-weight: 700; border-top: 2px solid #172033; }
+    .footer { margin-top: 8mm; color: #7c8798; font-size: 8pt; }
+  </style>
+</head>
+<body>
+  <h1>Interne Kalkulation {{ view.calculation.number or view.calculation.id }}</h1>
+
+  <div class="meta">
+    <div class="meta-row"><div class="meta-label">Unternehmen</div><div class="meta-value">{{ view.calculation.company_id }}</div></div>
+    <div class="meta-row"><div class="meta-label">Kunde</div><div class="meta-value">{{ view.calculation.customer_id }}</div></div>
+    <div class="meta-row"><div class="meta-label">Status</div><div class="meta-value">{{ view.calculation.status }}</div></div>
+    <div class="meta-row"><div class="meta-label">Währung</div><div class="meta-value">{{ view.calculation.currency }}</div></div>
+    <div class="meta-row"><div class="meta-label">Stand</div><div class="meta-value">{{ view.calculation.modified_at }}</div></div>
+  </div>
+
+  {% if view.permissions.price_access != "hidden" and view.pricing.has_missing_labor_costs %}
+  <div class="warning">
+    Interne Arbeitskosten fehlen mindestens bei einer Arbeitszeitposition. Die ausgewiesene Marge ist eine Teilkostenmarge und keine Vollkostenmarge.
+  </div>
+  {% endif %}
+
+  <h2>Positionen</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Pos.</th><th>Beschreibung</th><th class="number">Menge</th><th>Einheit</th>
+        {% if view.permissions.price_access != "hidden" %}
+        <th class="number">Interne Kosten</th><th class="number">VK/Einheit</th><th class="number">Netto</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for line in view.calculation.lines %}
+      <tr>
+        <td>{{ line.position_number or loop.index }}</td>
+        <td>{{ line.description }}</td>
+        <td class="number">{{ line.quantity }}</td>
+        <td>{{ line.uom }}</td>
+        {% if view.permissions.price_access != "hidden" %}
+        <td class="number">{{ line.pricing.internal_cost_amount if line.pricing.internal_cost_amount is not none else "unbekannt" }}</td>
+        <td class="number">{{ line.pricing.effective_unit_price if line.pricing.effective_unit_price is not none else "fehlt" }}</td>
+        <td class="number">{{ line.pricing.rounded_net_amount }}</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if view.permissions.price_access != "hidden" %}
+  <h2>Kalkulationssummen</h2>
+  <table class="totals">
+    <tr><td>Kostenbasis</td><td class="number">{{ view.pricing.cost_base }} {{ view.calculation.currency }}</td></tr>
+    <tr><td>Risiko</td><td class="number">{{ view.pricing.risk_amount }} {{ view.calculation.currency }}</td></tr>
+    <tr><td>Mindestverkaufspreis</td><td class="number">{{ view.pricing.minimum_sale_price }} {{ view.calculation.currency }}</td></tr>
+    <tr><td>Zielverkaufspreis</td><td class="number">{{ view.pricing.target_sale_price }} {{ view.calculation.currency }}</td></tr>
+    <tr><td>Rabatt</td><td class="number">-{{ view.pricing.discount_amount }} {{ view.calculation.currency }}</td></tr>
+    <tr><td>Nettoverkaufspreis</td><td class="number">{{ view.pricing.final_net_total }} {{ view.calculation.currency }}</td></tr>
+    <tr><td>Teilkostenmarge</td><td class="number">{{ view.pricing.contribution_amount }} {{ view.calculation.currency }}</td></tr>
+  </table>
+  {% else %}
+  <div class="warning">Preis-, Kosten-, Risiko-, Rabatt- und Margenwerte sind für diesen Benutzer nicht freigegeben und daher in diesem PDF nicht enthalten.</div>
+  {% endif %}
+
+  <div class="footer">Internes HWERP-Dokument · serverseitig mit aktuellem Frappe-Berechtigungskontext erzeugt</div>
+</body>
+</html>

@@ -1,0 +1,245 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "position_id",
+  "position_type",
+  "main_object_id",
+  "description",
+  "item",
+  "asset",
+  "supplier",
+  "quantity",
+  "uom",
+  "starts_at",
+  "ends_at",
+  "external_reference",
+  "internal_cost_rate",
+  "internal_cost_amount",
+  "price_list_rate",
+  "pricing_rule_rate",
+  "effective_rate",
+  "line_amount",
+  "discount_percent",
+  "discount_amount",
+  "selected_price_source",
+  "price_snapshot",
+  "resource_occupancy",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "position_id",
+   "fieldtype": "Data",
+   "label": "Positions-ID",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1,
+   "no_copy": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "position_type",
+   "fieldtype": "Select",
+   "label": "Positionsart",
+   "reqd": 1,
+   "in_list_view": 1,
+   "options": "Material\nArbeitszeit\nFremdleistung\nEigenes Asset\nExternes Mietmittel\nTransport\nReise und Uebernachtung\nGemeinkosten\nVerkaufsleistung\nHinweis"
+  },
+  {
+   "fieldname": "main_object_id",
+   "fieldtype": "Data",
+   "label": "Hauptobjekt-ID",
+   "search_index": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Beschreibung",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item",
+   "search_index": 1
+  },
+  {
+   "fieldname": "asset",
+   "fieldtype": "Link",
+   "label": "Asset",
+   "options": "Asset",
+   "search_index": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Lieferant/Vermieter",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "label": "Menge",
+   "reqd": 1,
+   "default": "1",
+   "non_negative": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "Einheit",
+   "options": "UOM",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "starts_at",
+   "fieldtype": "Datetime",
+   "label": "Beginn"
+  },
+  {
+   "fieldname": "ends_at",
+   "fieldtype": "Datetime",
+   "label": "Ende"
+  },
+  {
+   "fieldname": "external_reference",
+   "fieldtype": "Data",
+   "label": "Externe Referenz"
+  },
+  {
+   "fieldname": "internal_cost_rate",
+   "fieldtype": "Currency",
+   "label": "Interner Kostensatz",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "internal_cost_amount",
+   "fieldtype": "Currency",
+   "label": "Interner Kostenbetrag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "price_list_rate",
+   "fieldtype": "Currency",
+   "label": "Preislisten-Vorschlag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "pricing_rule_rate",
+   "fieldtype": "Currency",
+   "label": "Pricing-Rule-Vorschlag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "effective_rate",
+   "fieldtype": "Currency",
+   "label": "Wirksamer Verkaufssatz",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "line_amount",
+   "fieldtype": "Currency",
+   "label": "Netto-Zeilenbetrag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "discount_percent",
+   "fieldtype": "Percent",
+   "label": "Rabatt",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Rabattbetrag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "selected_price_source",
+   "fieldtype": "Select",
+   "label": "Wirksame Preisquelle",
+   "options": "Preislistenpreis\nPricing Rule\nHWERP Zielpreis\nPreisvorschlag\nManuell",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "price_snapshot",
+   "fieldtype": "Link",
+   "label": "Preissnapshot",
+   "options": "HWERP Kalkulationssnapshot",
+   "read_only": 1,
+   "no_copy": 1,
+   "permlevel": 1
+  },
+  {
+   "fieldname": "resource_occupancy",
+   "fieldtype": "Link",
+   "label": "Ressourcenbelegung",
+   "options": "HWERP Ressourcenbelegung",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Bemerkung"
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Kalkulationsposition",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "editable_grid": 1,
+ "istable": 1
+}

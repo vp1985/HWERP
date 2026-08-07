@@ -1,0 +1,222 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "rule_name",
+  "active",
+  "priority",
+  "rule_version",
+  "price_group",
+  "company",
+  "customer",
+  "project",
+  "item",
+  "erpnext_pricing_rule",
+  "rule_type",
+  "target_field",
+  "condition_json",
+  "value_type",
+  "rule_value",
+  "percent_value",
+  "currency",
+  "valid_from",
+  "valid_until",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "rule_name",
+   "fieldtype": "Data",
+   "label": "Regelname",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1,
+   "in_global_search": 1
+  },
+  {
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Aktiv",
+   "default": "1",
+   "search_index": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "label": "Prioritaet",
+   "reqd": 1,
+   "default": "0",
+   "search_index": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "rule_version",
+   "fieldtype": "Int",
+   "label": "Regelversion",
+   "reqd": 1,
+   "default": "1",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "price_group",
+   "fieldtype": "Link",
+   "label": "Preisgruppe",
+   "options": "HWERP Kalkulationspreisgruppe",
+   "search_index": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "search_index": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Kunde",
+   "options": "Customer",
+   "search_index": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Projekt",
+   "options": "Project"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item",
+   "search_index": 1
+  },
+  {
+   "fieldname": "erpnext_pricing_rule",
+   "fieldtype": "Link",
+   "label": "ERPNext Pricing Rule",
+   "options": "Pricing Rule"
+  },
+  {
+   "fieldname": "rule_type",
+   "fieldtype": "Select",
+   "label": "Regelart",
+   "reqd": 1,
+   "options": "Kostenregel\nPreisregel\nRisikoregel\nMargenregel"
+  },
+  {
+   "fieldname": "target_field",
+   "fieldtype": "Select",
+   "label": "Zielfeld",
+   "reqd": 1,
+   "search_index": 1,
+   "options": "Interner Kostensatz\nVerkaufssatz\nRisiko\nZielmarge"
+  },
+  {
+   "fieldname": "condition_json",
+   "fieldtype": "JSON",
+   "label": "Bedingungen"
+  },
+  {
+   "fieldname": "value_type",
+   "fieldtype": "Select",
+   "label": "Wertart",
+   "reqd": 1,
+   "default": "Betrag",
+   "options": "Betrag\nProzent"
+  },
+  {
+   "fieldname": "rule_value",
+   "fieldtype": "Currency",
+   "label": "Regelwert",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "reqd": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "percent_value",
+   "fieldtype": "Percent",
+   "label": "Prozentwert",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Waehrung",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "valid_from",
+   "fieldtype": "Date",
+   "label": "Gueltig ab"
+  },
+  {
+   "fieldname": "valid_until",
+   "fieldtype": "Date",
+   "label": "Gueltig bis"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Beschreibung"
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Kalkulationsregel",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "HWERP Pricing Rule Manager",
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "HWERP Pricing Rule Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:rule_name",
+ "title_field": "rule_name",
+ "search_fields": "rule_name,target_field,item"
+}

@@ -1,0 +1,227 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "calculation",
+  "calculation_version",
+  "position_id",
+  "source_type",
+  "source_row_id",
+  "supplier_quotation",
+  "purchase_order",
+  "purchase_invoice",
+  "supplier",
+  "company",
+  "currency",
+  "source_docstatus",
+  "source_net_amount",
+  "allocated_net_amount",
+  "allocation_key",
+  "active",
+  "audit_version",
+  "captured_at",
+  "captured_by",
+  "source_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "calculation",
+   "fieldtype": "Link",
+   "label": "Kalkulation",
+   "options": "HWERP Kalkulation",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "calculation_version",
+   "fieldtype": "Int",
+   "label": "Kalkulationsversion",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "position_id",
+   "fieldtype": "Data",
+   "label": "Positions-ID",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "source_type",
+   "fieldtype": "Select",
+   "label": "Quellbelegart",
+   "reqd": 1,
+   "set_only_once": 1,
+   "options": "Supplier Quotation\nPurchase Order\nPurchase Invoice",
+   "search_index": 1
+  },
+  {
+   "fieldname": "source_row_id",
+   "fieldtype": "Data",
+   "label": "Quellzeilen-ID",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "supplier_quotation",
+   "fieldtype": "Link",
+   "label": "Lieferantenangebot",
+   "options": "Supplier Quotation",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "purchase_order",
+   "fieldtype": "Link",
+   "label": "Bestellung",
+   "options": "Purchase Order",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Link",
+   "label": "Eingangsrechnung",
+   "options": "Purchase Invoice",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Lieferant",
+   "options": "Supplier",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Waehrung",
+   "options": "Currency",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "source_docstatus",
+   "fieldtype": "Int",
+   "label": "Quellbeleg-Docstatus",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "source_net_amount",
+   "fieldtype": "Currency",
+   "label": "Quell-Nettowert",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "allocated_net_amount",
+   "fieldtype": "Currency",
+   "label": "Zugeordneter Nettobetrag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "reqd": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "allocation_key",
+   "fieldtype": "Data",
+   "label": "Zuordnungsschluessel",
+   "unique": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Aktiv",
+   "default": "1",
+   "search_index": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "audit_version",
+   "fieldtype": "Int",
+   "label": "Auditversion",
+   "reqd": 1,
+   "default": "1",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "captured_at",
+   "fieldtype": "Datetime",
+   "label": "Erfasst am",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "captured_by",
+   "fieldtype": "Link",
+   "label": "Erfasst von",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "source_status",
+   "fieldtype": "Data",
+   "label": "Quellstatus-Snapshot",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Fremdleistungsverknuepfung",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "hash",
+ "search_fields": "calculation,position_id,source_row_id"
+}

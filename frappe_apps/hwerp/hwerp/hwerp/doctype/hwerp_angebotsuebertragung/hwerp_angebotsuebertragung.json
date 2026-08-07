@@ -1,0 +1,175 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "idempotency_key",
+  "calculation",
+  "calculation_number",
+  "calculation_version",
+  "company",
+  "customer",
+  "quotation",
+  "status",
+  "transferred_at",
+  "transferred_by",
+  "position_count",
+  "source_deleted",
+  "transfer_snapshot"
+ ],
+ "fields": [
+  {
+   "fieldname": "idempotency_key",
+   "fieldtype": "Data",
+   "label": "Idempotency-Key",
+   "reqd": 1,
+   "unique": 1,
+   "set_only_once": 1,
+   "search_index": 1,
+   "no_copy": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "calculation",
+   "fieldtype": "Link",
+   "label": "Live-Link Kalkulation",
+   "options": "HWERP Kalkulation",
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "calculation_number",
+   "fieldtype": "Data",
+   "label": "Kalkulationsnummer",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "calculation_version",
+   "fieldtype": "Int",
+   "label": "Kalkulationsversion",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Kunde",
+   "options": "Customer",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "Angebot",
+   "options": "Quotation",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "reqd": 1,
+   "default": "Erstellt",
+   "options": "Erstellt\nAbweichend\nQuelle geloescht",
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "transferred_at",
+   "fieldtype": "Datetime",
+   "label": "Uebertragen am",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "transferred_by",
+   "fieldtype": "Link",
+   "label": "Uebertragen von",
+   "options": "User",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "position_count",
+   "fieldtype": "Int",
+   "label": "Anzahl Positionen",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "source_deleted",
+   "fieldtype": "Check",
+   "label": "Quelle geloescht",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "transfer_snapshot",
+   "fieldtype": "JSON",
+   "label": "Uebertragungssnapshot",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Angebotsuebertragung",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:HWERP-TR-{YYYY}-{#####}",
+ "search_fields": "quotation,calculation_number,idempotency_key"
+}

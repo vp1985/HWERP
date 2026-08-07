@@ -1,0 +1,57 @@
+# Version control and local agent state
+.git/
+.github/
+.hermes/
+.venv/
+
+# Secret, Site and backup data
+**/.env
+**/.env.*
+**/.npmrc
+**/site_config.json
+**/common_site_config.json
+**/private/
+**/backups/
+**/*.log
+**/*.sql.gz
+**/*.dump
+**/*.backup
+**/*.bak
+**/*.old
+**/*.orig
+**/*.tar
+**/*.tar.gz
+**/*.tgz
+**/*.7z
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+**/id_rsa
+**/id_dsa
+**/id_ecdsa
+**/id_ed25519
+**/.netrc
+**/.pypirc
+**/.aws/
+**/.azure/
+**/.kube/
+**/.config/gcloud/
+**/credentials.json
+**/service-account*.json
+
+# Generated dependencies and caches
+**/node_modules/
+**/dist/
+**/coverage/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+**/.mypy_cache/
+
+# Not needed to build the Frappe extension image
+frontend/
+docs/
+scripts/

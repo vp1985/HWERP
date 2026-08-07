@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HWERP Arbeitsvorbereitung – Trafo-Werkstattkarten Mockup</title>
+  <style>
+    :root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #111827; background: #eef2f7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .canvas { min-height: 100vh; padding: 22px; display: grid; grid-template-columns: 1.15fr 390px; gap: 24px; align-items: start; }
+    .desktop { height: 820px; background: #fff; border: 1px solid #d1d5db; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 236px 1fr; box-shadow: 0 22px 50px rgba(15,23,42,.16); }
+    .sidebar { background: #111827; color: #e5e7eb; padding: 22px 0; }
+    .brand { padding: 0 22px 18px; border-bottom: 1px solid #1f2937; }
+    .brand b { display: block; font-size: 20px; color: #fff; }
+    .brand span { color: #9ca3af; font-size: 12px; }
+    .nav { padding-top: 14px; }
+    .nav div { padding: 11px 22px; font-size: 14px; color: #cbd5e1; }
+    .nav .active { background: #2563eb; color: #fff; font-weight: 700; }
+    .nav .sub { padding-left: 38px; font-size: 13px; }
+    .main { background: #f8fafc; padding: 22px; overflow: hidden; }
+    .top { display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px; }
+    h1 { margin: 0; font-size: 25px; line-height: 1.1; }
+    .muted { color: #64748b; font-size: 13px; }
+    .btn { border: 0; background: #2563eb; color: white; padding: 10px 14px; border-radius: 10px; font-weight: 700; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 14px; }
+    .stat, .card { background: white; border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 1px 2px rgba(15,23,42,.04); }
+    .stat { padding: 12px; }
+    .stat .n { font-size: 23px; font-weight: 800; }
+    .stat .l { font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: 800; }
+    .layout { display: grid; grid-template-columns: 1fr 310px; gap: 14px; }
+    .card { padding: 14px; }
+    .card h2 { margin: 0 0 10px; font-size: 15px; }
+    .search { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-bottom: 12px; }
+    input, select { width: 100%; border: 1px solid #d1d5db; border-radius: 10px; padding: 9px 10px; font-size: 13px; background: white; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th { text-align: left; color: #64748b; background: #f8fafc; font-size: 11px; }
+    td, th { padding: 9px 8px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+    .chip { display: inline-flex; padding: 3px 8px; border-radius: 999px; font-size: 10px; font-weight: 800; background: #dbeafe; color: #1d4ed8; }
+    .green { background: #dcfce7; color: #15803d; }
+    .amber { background: #fef3c7; color: #b45309; }
+    .gray { background: #f1f5f9; color: #64748b; }
+    .prep-row { display: grid; grid-template-columns: 22px 1fr 68px; gap: 8px; align-items: center; padding: 9px 0; border-bottom: 1px solid #eef2f7; font-size: 12px; }
+    .check { width: 18px; height: 18px; border-radius: 5px; border: 2px solid #2563eb; }
+    .locked .check { border-color: #cbd5e1; background: #f1f5f9; }
+    .tiny { font-size: 11px; color: #64748b; }
+    .phone-wrap { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+    .label { font-weight: 800; color: #334155; }
+    .phone { width: 360px; height: 820px; border: 12px solid #111827; border-radius: 38px; background: #f8fafc; overflow: hidden; box-shadow: 0 22px 50px rgba(15,23,42,.22); }
+    .phone-head { background: #fff; padding: 15px 16px 12px; border-bottom: 1px solid #e5e7eb; }
+    .phone-head h2 { margin: 0; font-size: 18px; }
+    .phone-body { padding: 12px; }
+    .work-card { background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 12px; margin-bottom: 10px; }
+    .work-top { display: flex; justify-content: space-between; gap: 8px; align-items: start; }
+    .work-title { font-weight: 800; font-size: 14px; }
+    .time-grid { display: grid; grid-template-columns: 1fr 1fr 70px; gap: 7px; margin: 10px 0; }
+    .upload { border: 1px dashed #93c5fd; color: #1d4ed8; background: #eff6ff; border-radius: 10px; padding: 9px; text-align: center; font-weight: 700; font-size: 12px; }
+    .sign { background: #111827; color: white; border-radius: 10px; padding: 9px; text-align: center; font-weight: 800; font-size: 12px; }
+    .done { border-left: 5px solid #22c55e; }
+    .blocked { opacity: .66; }
+    .blocked .sign { background: #cbd5e1; color: #64748b; }
+    .footerbar { position: relative; margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    @media (max-width: 1100px) { .canvas { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <section>
+      <div class="label" style="margin:0 0 8px 4px">Desktop / Büro & Arbeitsvorbereitung</div>
+      <div class="desktop">
+        <aside class="sidebar">
+          <div class="brand"><b>HWERP</b><span>MVP Kalkulationen</span></div>
+          <nav class="nav">
+            <div>Dashboard</div><div>Assets</div><div>Trafo-Lager</div><div>Anfragen</div>
+            <div class="active">Arbeitsvorbereitung</div>
+            <div class="sub active">Trafo-Werkstattkarten</div>
+            <div class="sub">Rüstlisten</div><div class="sub">Vorlagen</div>
+            <div>Service</div><div>Stammdaten</div>
+          </nav>
+        </aside>
+        <main class="main">
+          <div class="top">
+            <div><div class="muted" style="font-weight:800;color:#2563eb">Arbeitsvorbereitung</div><h1>Trafo-Werkstattkarten</h1><div class="muted">Auftrag + Trafo suchen, Leistungen vorbereiten, Mitarbeiter zuweisen.</div></div>
+            <button class="btn">+ Karte anlegen</button>
+          </div>
+          <div class="grid">
+            <div class="stat"><div class="l">Offen</div><div class="n">12</div></div>
+            <div class="stat"><div class="l">In Arbeit</div><div class="n">5</div></div>
+            <div class="stat"><div class="l">Fertig</div><div class="n">8</div></div>
+            <div class="stat"><div class="l">Gesamtzeit</div><div class="n">64h</div></div>
+          </div>
+          <div class="layout">
+            <div class="card">
+              <h2>Kartenliste</h2>
+              <div class="search"><input placeholder="Suchen: Seriennr., HT-Nr., Kunde, Hersteller …"><select><option>Status: alle</option></select><button class="btn">Suchen</button></div>
+              <table><thead><tr><th>Karte</th><th>Trafo</th><th>Kunde</th><th>Status</th><th>Zeit</th><th>Zuweisung</th></tr></thead>
+              <tbody>
+                <tr><td><b>WK-2026-0042</b><br><span class="tiny">AU-2026-118</span></td><td>HT-1048<br><span class="tiny">SGB · SN 88421</span></td><td>HT Service</td><td><span class="chip amber">in Arbeit</span></td><td>6:30</td><td>VA, MK</td></tr>
+                <tr><td><b>WK-2026-0043</b><br><span class="tiny">AU-2026-119</span></td><td>HT-1051<br><span class="tiny">Siemens · SN 55120</span></td><td>Netzbau West</td><td><span class="chip">vorbereitet</span></td><td>0:00</td><td>JS</td></tr>
+                <tr><td><b>WK-2026-0044</b><br><span class="tiny">AU-2026-120</span></td><td>HT-1052<br><span class="tiny">Trafo Union · SN 99002</span></td><td>Industriepark</td><td><span class="chip green">fertig</span></td><td>9:15</td><td>VA</td></tr>
+              </tbody></table>
+            </div>
+            <aside class="card">
+              <h2>Karte vorbereiten</h2>
+              <input placeholder="Trafo/Auftrag suchen: HT-Nr. oder Seriennr." style="margin-bottom:8px">
+              <div class="tiny" style="margin-bottom:10px"><b>HT-1048</b> · SGB · 630 kVA · 20/0,4 kV · Kunde HT Service</div>
+              <div class="prep-row"><div class="check"></div><div><b>Eingangsprüfung</b><div class="tiny">Foto Pflicht · VA</div></div><span class="chip">Pflicht</span></div>
+              <div class="prep-row locked"><div class="check"></div><div><b>Elektrische Prüfung</b><div class="tiny">gesperrt bis Eingangsprüfung</div></div><span class="chip gray">Sperre</span></div>
+              <div class="prep-row locked"><div class="check"></div><div><b>Hochspannungsprüfung</b><div class="tiny">Protokoll Pflicht</div></div><span class="chip gray">Sperre</span></div>
+              <div class="prep-row"><div class="check"></div><div><b>Ausgangsprüfung</b><div class="tiny">Unterschrift Pflicht</div></div><span class="chip">Pflicht</span></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><button class="btn">Leer drucken</button><button class="btn" style="background:#0f172a">Stand drucken</button></div>
+              <div class="tiny" style="margin-top:10px">QR-Code auf Druckkarte vorgesehen.</div>
+            </aside>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <section class="phone-wrap">
+      <div class="label">Smartphone / Gewerblicher Mitarbeiter</div>
+      <div class="phone">
+        <div class="phone-head"><div class="muted">Meine Werkstattkarte</div><h2>WK-2026-0042 · HT-1048</h2><div class="tiny">SGB · SN 88421 · Gesamt 6:30</div></div>
+        <div class="phone-body">
+          <div class="work-card done"><div class="work-top"><div><div class="work-title">Eingangsprüfung</div><div class="tiny">Pflichtfoto erfüllt · VA</div></div><span class="chip green">erledigt</span></div><div class="time-grid"><input value="07:15"><input value="08:05"><input value="VA"></div><div class="upload">2 Fotos vorhanden</div><div class="sign">Unterschrieben</div></div>
+          <div class="work-card"><div class="work-top"><div><div class="work-title">Elektrische Prüfung</div><div class="tiny">Prüfprotokoll erforderlich</div></div><span class="chip amber">offen</span></div><div class="time-grid"><input placeholder="von"><input placeholder="bis"><input placeholder="Kürzel"></div><div class="upload">+ Protokoll/Foto hochladen</div><div class="footerbar"><button class="btn">Erledigt</button><div class="sign">Unterschrift</div></div></div>
+          <div class="work-card blocked"><div class="work-top"><div><div class="work-title">Hochspannungsprüfung</div><div class="tiny">Gesperrt: elektrische Prüfung fehlt</div></div><span class="chip gray">gesperrt</span></div><div class="time-grid"><input disabled placeholder="von"><input disabled placeholder="bis"><input disabled placeholder="Kürzel"></div><div class="upload">Protokoll Pflicht</div><div class="sign">Noch gesperrt</div></div>
+          <div class="work-card"><div class="work-top"><div><div class="work-title">Reinigung</div><div class="tiny">optional Material / Notiz</div></div><span class="chip">bereit</span></div><div class="time-grid"><input placeholder="von"><input placeholder="bis"><input placeholder="Kürzel"></div><div class="upload">+ Foto optional</div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

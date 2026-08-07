@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HWERP Mockup – Universelles Kontakt-Modal</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fafc;
+      --border: #d9e2ef;
+      --border-strong: #b8c7db;
+      --text: #172033;
+      --muted: #64748b;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #15803d;
+      --green-soft: #e9f9ee;
+      --amber: #b45309;
+      --amber-soft: #fff7ed;
+      --red-soft: #fef2f2;
+      --shadow: 0 24px 70px rgba(15, 23, 42, .18);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,.12), transparent 32rem),
+        linear-gradient(180deg, #f8fbff, var(--bg));
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1d4ed8, #0f766e);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      box-shadow: 0 12px 30px rgba(37,99,235,.25);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 26px; letter-spacing: -.03em; }
+    .subtitle { color: var(--muted); margin-top: 4px; }
+
+    .mockup-frame {
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(217,226,239,.9);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px 22px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: default;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .btn.primary { background: var(--blue); color: white; box-shadow: 0 10px 22px rgba(37,99,235,.22); }
+    .btn.light { background: #eef4ff; color: #1d4ed8; border: 1px solid #c7d8ff; }
+    .btn.ghost { background: white; color: #334155; border: 1px solid var(--border); }
+    .btn.green { background: var(--green); color: white; }
+    .btn.warn { background: #f97316; color: white; }
+    .btn.small { padding: 7px 10px; border-radius: 10px; font-size: 12px; }
+
+    .inquiry-modal {
+      width: min(1380px, 100%);
+      margin: 0 auto;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 18px 55px rgba(15, 23, 42, .12);
+    }
+
+    .modal-head {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      background: linear-gradient(180deg, #fff, #f8fbff);
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.42fr) minmax(360px, .82fr);
+      gap: 18px;
+      padding: 20px;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .stack { display: grid; gap: 14px; }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .card.soft { background: var(--panel-soft); }
+    .card.blue { border-color: #bcd0ff; background: linear-gradient(180deg, #f8fbff, #eef5ff); }
+    .card.green { border-color: #bde8cb; background: linear-gradient(180deg, #f8fffb, #ecfdf3); }
+    .card.amber { border-color: #fed7aa; background: linear-gradient(180deg, #fffaf4, #fff7ed); }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .card-title h3 { font-size: 15px; letter-spacing: -.01em; }
+    .hint { color: var(--muted); font-size: 12px; line-height: 1.45; }
+
+    label { display: block; font-size: 12px; font-weight: 700; color: #334155; margin: 0 0 6px; }
+
+    .field {
+      min-height: 43px;
+      border: 1px solid var(--border-strong);
+      border-radius: 13px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 11px;
+      font-size: 13px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+    }
+    .field.placeholder { color: #94a3b8; }
+    .field.selected { border-color: #7aa7ff; background: #fbfdff; }
+    .field.warning { border-color: #fdba74; background: #fffbeb; }
+    .field .plus {
+      width: 26px;
+      height: 26px;
+      border-radius: 9px;
+      background: var(--blue);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      flex: none;
+    }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+    .pill {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 8px;
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #dbe3ff;
+    }
+    .pill.green { background: var(--green-soft); color: #166534; border-color: #bbf7d0; }
+    .pill.amber { background: var(--amber-soft); color: var(--amber); border-color: #fed7aa; }
+    .pill.gray { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+
+    .warning-box {
+      border: 1px solid #fdba74;
+      background: #fff7ed;
+      color: #92400e;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 12px;
+      line-height: 1.45;
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .relation-map {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .relation-row {
+      display: grid;
+      grid-template-columns: 128px 1fr;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+    }
+    .relation-row strong { color: #1f2937; }
+    .relation-box {
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: white;
+      color: #475569;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, .33);
+      display: grid;
+      place-items: center;
+      padding: 26px;
+    }
+
+    .universal-modal {
+      width: min(760px, 96vw);
+      background: white;
+      border-radius: 24px;
+      border: 1px solid rgba(217,226,239,.95);
+      box-shadow: 0 35px 90px rgba(2, 6, 23, .32);
+      overflow: hidden;
+    }
+
+    .universal-body { padding: 20px; display: grid; gap: 14px; }
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .tab {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+      color: #475569;
+      background: #f8fafc;
+    }
+    .tab.active { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .input {
+      min-height: 42px;
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 10px 11px;
+      color: #334155;
+      background: white;
+      font-size: 13px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+    }
+
+    .callouts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .callout {
+      background: rgba(255,255,255,.86);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.45;
+    }
+    .callout strong { display: block; color: #0f172a; margin-bottom: 4px; }
+
+    @media (max-width: 1050px) {
+      .modal-body, .callouts { grid-template-columns: 1fr; }
+      .form-grid, .grid-2 { grid-template-columns: 1fr; }
+      .overlay { position: relative; background: transparent; padding: 16px 0 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="topbar">
+      <div class="brand">
+        <div class="logo">HW</div>
+        <div>
+          <h1>Mockup: universelles Kontakt-Modal</h1>
+          <p class="subtitle">Planansicht für Anfrage-Dashboard, Kontakte, Beziehungen und spätere Provisionshinweise</p>
+        </div>
+      </div>
+      <button class="btn primary">Neue Anfrage</button>
+    </section>
+
+    <section class="mockup-frame">
+      <div class="dashboard-header">
+        <div>
+          <h2>Anfrage anlegen</h2>
+          <p class="hint">Alle Suchfelder nutzen denselben Kontakt-/Zuordnungsbaustein mit Autocomplete und + Neu.</p>
+        </div>
+        <span class="pill gray">90% Modalbreite · systemweite Komponente</span>
+      </div>
+
+      <div class="inquiry-modal">
+        <div class="modal-head">
+          <div>
+            <h2>Neue Anfrage</h2>
+            <p class="hint">Rechnungsempfänger, Ansprechpartner, Betreiber, Vermittler und Standort bleiben getrennte Beziehungen.</p>
+          </div>
+          <button class="btn ghost small">× Schließen</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="stack">
+            <div class="grid-2">
+              <div>
+                <label>Titel der Anfrage</label>
+                <div class="field selected">Wartung Trafoanlage Isoblock Werk 2</div>
+              </div>
+              <div>
+                <label>Anfragekategorie</label>
+                <div class="field selected">Trafo-Service / Wartung</div>
+              </div>
+            </div>
+
+            <div class="card blue">
+              <div class="card-title">
+                <h3>Rechnungsempfänger</h3>
+                <span class="pill green">Firma · kein Standort</span>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <label>Firma suchen oder neu anlegen</label>
+                  <div class="field selected"><span>Isoblock GmbH</span><span class="plus">+</span></div>
+                  <p class="hint" style="margin-top:6px">Der gleiche + Button öffnet überall das universelle Kontakt-Modal.</p>
+                </div>
+                <div>
+                  <label>Ansprechpartner suchen</label>
+                  <div class="field warning"><span>Simon Küper</span><span class="plus">+</span></div>
+                  <div class="warning-box">
+                    <strong>Achtung: Beziehung nicht vermerkt.</strong>
+                    Simon Küper ist noch nicht als Ansprechpartner von Isoblock GmbH verknüpft.
+                    <div><button class="btn warn small">Verknüpfung erstellen</button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <h3>Standort</h3>
+                <span class="pill amber">Standort eigene Entität</span>
+              </div>
+              <label>Standort suchen oder später Beziehung pflegen</label>
+              <div class="field selected"><span>Werk 2 · Bahnhofstraße 18 · 46325 Borken</span><span class="plus">+</span></div>
+              <div class="pill-row">
+                <span class="pill gray">Betreiber: Isoblock GmbH</span>
+                <span class="pill gray">Assets am Standort: 4</span>
+                <span class="pill gray">Eigentümer später beziehungsbasiert</span>
+              </div>
+            </div>
+
+            <div class="card soft">
+              <div class="card-title">
+                <h3>Assets</h3>
+                <span class="pill green">Mehrfachauswahl</span>
+              </div>
+              <label>Asset suchen oder neu anlegen</label>
+              <div class="field placeholder"><span>Trafo, Seriennummer, HT-Nummer suchen …</span><span class="plus">+</span></div>
+              <div class="pill-row">
+                <span class="pill">HT-0241 · 630 kVA ×</span>
+                <span class="pill">HT-0318 · Öltrafo ×</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="stack">
+            <div class="card green">
+              <div class="card-title">
+                <h3>Vermittler / Provisionsempfänger</h3>
+                <span class="pill amber">Provision prüfen</span>
+              </div>
+              <label>Firma, Person oder Firma+Person suchen</label>
+              <div class="field selected"><span>BDE Heek · Empfehlungskontakt</span><span class="plus">+</span></div>
+              <div class="warning-box">
+                <strong>Dauerhafte Provisionsregel gefunden.</strong>
+                Bei Kunden über BDE Heek Provision wahrscheinlich prüfen/einrechnen. Kein Betrag im Anfragemodul.
+              </div>
+            </div>
+
+            <div class="card amber">
+              <div class="card-title">
+                <h3>Betreiber</h3>
+                <span class="pill green">Firma · kein Standort</span>
+              </div>
+              <label>Betreiber suchen oder neu anlegen</label>
+              <div class="field selected"><span>Isoblock GmbH</span><span class="plus">+</span></div>
+              <p class="hint" style="margin-top:7px">Nicht automatisch aus Rechnungsempfänger ableiten, aber schnell auswählbar.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <h3>Beziehungslogik statt Kontakt-Haken</h3>
+              </div>
+              <div class="relation-map">
+                <div class="relation-row"><strong>Kontakt</strong><div class="relation-box">Isoblock GmbH bleibt neutraler Stammdatensatz</div></div>
+                <div class="relation-row"><strong>Anfrage</strong><div class="relation-box">Rolle: Rechnungsempfänger + Betreiber</div></div>
+                <div class="relation-row"><strong>Standort</strong><div class="relation-box">Firma ist dem Standort zugeordnet</div></div>
+                <div class="relation-row"><strong>Person</strong><div class="relation-box">Simon Küper ↔ Hauptfirma über is_primary</div></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="overlay" aria-label="Universal-Kontakt-Modal Beispiel">
+        <div class="universal-modal">
+          <div class="modal-head">
+            <div>
+              <h2>Kontakt anlegen</h2>
+              <p class="hint">Kontext: Ansprechpartner Rechnungsempfänger · gleiche Komponente wie bei Betreiber/Vermittler</p>
+            </div>
+            <span class="pill green">wird danach automatisch ausgewählt</span>
+          </div>
+
+          <div class="universal-body">
+            <div class="tabs">
+              <div class="tab">Firma</div>
+              <div class="tab active">Ansprechpartner</div>
+              <div class="tab">Firma + Ansprechpartner</div>
+            </div>
+
+            <div class="form-grid">
+              <div>
+                <label>Vorname</label>
+                <div class="input">Simon</div>
+              </div>
+              <div>
+                <label>Nachname</label>
+                <div class="input">Küper</div>
+              </div>
+              <div>
+                <label>E-Mail</label>
+                <div class="input">kontakt@example.com</div>
+              </div>
+              <div>
+                <label>Telefon</label>
+                <div class="input">+49 …</div>
+              </div>
+            </div>
+
+            <div class="card soft">
+              <div class="card-title">
+                <h3>Firma verknüpfen</h3>
+                <span class="pill green">Hauptfirma: customer_contact_persons.is_primary</span>
+              </div>
+              <label>Firma suchen</label>
+              <div class="field selected"><span>Isoblock GmbH</span><span class="plus">+</span></div>
+              <div class="pill-row">
+                <span class="pill green">Als Hauptfirma markieren</span>
+                <span class="pill gray">Weitere Firmen später möglich</span>
+              </div>
+            </div>
+
+            <div class="card amber">
+              <div class="card-title">
+                <h3>Rückgabe an aktuelles Feld</h3>
+              </div>
+              <p class="hint">Nach Speichern setzt die Anfrage automatisch: Ansprechpartner = Simon Küper, Rechnungsempfänger = Isoblock GmbH, Verknüpfung vorhanden.</p>
+            </div>
+          </div>
+
+          <div class="footer">
+            <button class="btn ghost">Abbrechen</button>
+            <button class="btn primary">Speichern und auswählen</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="callouts">
+      <div class="callout"><strong>1. Ein Modal überall</strong>Rechnungsempfänger, Betreiber, Vermittler und Ansprechpartner öffnen dieselbe Kontaktanlage.</div>
+      <div class="callout"><strong>2. Keine Rollen-Haken</strong>Kontakte bleiben neutral. Rollen entstehen im Vorgang durch Beziehungen.</div>
+      <div class="callout"><strong>3. Hauptfirma sauber</strong>`customer_contact_persons.is_primary` steuert automatische Vorschläge.</div>
+      <div class="callout"><strong>4. Warnungen statt Fehler</strong>Fehlende Person↔Firma-Verknüpfungen werden sichtbar und direkt korrigierbar.</div>
+    </section>
+  </main>
+</body>
+</html>

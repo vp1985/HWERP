@@ -1,0 +1,304 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "calculation",
+  "snapshot_type",
+  "snapshot_version",
+  "calculation_version",
+  "company",
+  "currency",
+  "price_group",
+  "price_list",
+  "risk_percent",
+  "margin_method",
+  "target_margin",
+  "cost_total",
+  "risk_amount",
+  "minimum_selling_price",
+  "target_selling_price",
+  "gross_selling_amount",
+  "discount_amount",
+  "net_selling_amount",
+  "partial_margin_amount",
+  "price_precision",
+  "rounding_method",
+  "has_missing_labor_cost",
+  "payload",
+  "captured_at",
+  "captured_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "calculation",
+   "fieldtype": "Link",
+   "label": "Kalkulation",
+   "options": "HWERP Kalkulation",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "snapshot_type",
+   "fieldtype": "Select",
+   "label": "Snapshot-Art",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1,
+   "options": "Kalkulation\nPreis\nRegel\nObjekt\nAsset\nMietmittel"
+  },
+  {
+   "fieldname": "snapshot_version",
+   "fieldtype": "Int",
+   "label": "Snapshot-Version",
+   "reqd": 1,
+   "default": "1",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "calculation_version",
+   "fieldtype": "Int",
+   "label": "Kalkulationsversion",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Waehrung",
+   "options": "Currency",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "price_group",
+   "fieldtype": "Link",
+   "label": "Preisgruppe",
+   "options": "HWERP Kalkulationspreisgruppe",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "Preisliste",
+   "options": "Price List",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "risk_percent",
+   "fieldtype": "Percent",
+   "label": "Risikopuffer",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "margin_method",
+   "fieldtype": "Data",
+   "label": "Margenart",
+   "read_only": 1,
+   "no_copy": 1,
+   "permlevel": 1
+  },
+  {
+   "fieldname": "target_margin",
+   "fieldtype": "Percent",
+   "label": "Zielmarge",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cost_total",
+   "fieldtype": "Currency",
+   "label": "Kostenbasis C",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "risk_amount",
+   "fieldtype": "Currency",
+   "label": "Risikobetrag R",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "minimum_selling_price",
+   "fieldtype": "Currency",
+   "label": "Mindestverkaufspreis M",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "target_selling_price",
+   "fieldtype": "Currency",
+   "label": "Zielverkaufspreis T",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "gross_selling_amount",
+   "fieldtype": "Currency",
+   "label": "Zeilensumme P",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Rabattbetrag D",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "net_selling_amount",
+   "fieldtype": "Currency",
+   "label": "Endverkaufspreis F",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "partial_margin_amount",
+   "fieldtype": "Currency",
+   "label": "Teilkostenmarge G",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "price_precision",
+   "fieldtype": "Int",
+   "label": "Preis-/Waehrungspraezision",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "rounding_method",
+   "fieldtype": "Data",
+   "label": "Rundungsmethode",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "has_missing_labor_cost",
+   "fieldtype": "Check",
+   "label": "Interne Arbeitskosten fehlen",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "payload",
+   "fieldtype": "JSON",
+   "label": "Strukturierter Snapshot",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "captured_at",
+   "fieldtype": "Datetime",
+   "label": "Erfasst am",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "captured_by",
+   "fieldtype": "Link",
+   "label": "Erfasst von",
+   "options": "User",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Kalkulationssnapshot",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "hash",
+ "search_fields": "calculation,snapshot_type"
+}

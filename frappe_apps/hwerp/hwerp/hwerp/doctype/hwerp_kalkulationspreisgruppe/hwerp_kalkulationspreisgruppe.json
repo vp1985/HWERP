@@ -1,0 +1,153 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "price_group_name",
+  "active",
+  "price_list",
+  "target_margin",
+  "margin_method",
+  "default_risk",
+  "priority",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "price_group_name",
+   "fieldtype": "Data",
+   "label": "Preisgruppenname",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1,
+   "in_global_search": 1
+  },
+  {
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Aktiv",
+   "default": "1",
+   "search_index": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "ERPNext-Preisliste",
+   "options": "Price List",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "target_margin",
+   "fieldtype": "Percent",
+   "label": "Zielmarge",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "reqd": 1,
+   "default": "0"
+  },
+  {
+   "fieldname": "margin_method",
+   "fieldtype": "Select",
+   "label": "Margenberechnungsart",
+   "reqd": 1,
+   "default": "Aufschlag auf Kostenbasis",
+   "options": "Aufschlag auf Kostenbasis\nMarge vom Verkaufspreis"
+  },
+  {
+   "fieldname": "default_risk",
+   "fieldtype": "Percent",
+   "label": "Standard-Risikopuffer",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "reqd": 1,
+   "default": "0"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "label": "Prioritaet",
+   "reqd": 1,
+   "default": "0"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Beschreibung"
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Kalkulationspreisgruppe",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "HWERP Calculation User"
+  },
+  {
+   "read": 1,
+   "role": "HWERP Price Reviewer"
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "HWERP Price Reviewer"
+  },
+  {
+   "read": 1,
+   "role": "HWERP Price User"
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "HWERP Price User"
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "HWERP Pricing Rule Manager",
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "HWERP Pricing Rule Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:price_group_name",
+ "title_field": "price_group_name",
+ "search_fields": "price_group_name,price_list"
+}

@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HWERP Demo</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-soft: #1f2937;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --brand: #2563eb;
+      --brand-dark: #1d4ed8;
+      --accent: #f59e0b;
+      --ok: #16a34a;
+      --danger: #dc2626;
+      --radius: 18px;
+      --shadow: 0 24px 70px rgba(15, 23, 42, .18);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 45%, #fef3c7 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    aside {
+      background: linear-gradient(180deg, var(--bg), #020617);
+      color: white;
+      padding: 28px 22px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .logo {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 34px;
+    }
+
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .logo strong { display: block; font-size: 20px; }
+    .logo span { color: #cbd5e1; font-size: 13px; }
+
+    nav { display: grid; gap: 8px; }
+    nav button {
+      border: 0;
+      color: #cbd5e1;
+      background: transparent;
+      text-align: left;
+      padding: 13px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: .18s ease;
+    }
+    nav button:hover, nav button.active {
+      background: rgba(255,255,255,.11);
+      color: white;
+    }
+
+    .sidebar-note {
+      margin-top: 34px;
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.08);
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    main { padding: 28px; }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 18px;
+    }
+
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); letter-spacing: -.04em; }
+    .subtitle { margin: 8px 0 0; color: var(--muted); }
+
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 17px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--brand);
+      color: white;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, .24);
+    }
+    .btn.secondary { background: white; color: var(--text); box-shadow: none; border: 1px solid var(--line); }
+
+    .grid { display: grid; gap: 18px; }
+    .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 18px; }
+    .card {
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(226,232,240,.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      backdrop-filter: blur(12px);
+    }
+
+    .stat-label { color: var(--muted); font-size: 13px; }
+    .stat-value { font-size: 30px; font-weight: 900; margin-top: 8px; }
+    .stat-change { color: var(--ok); font-size: 13px; margin-top: 6px; }
+
+    .two-col { grid-template-columns: 1.2fr .8fr; align-items: start; }
+    .section-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .section-title h2 { margin: 0; font-size: 20px; }
+    .pill { display: inline-flex; border-radius: 999px; padding: 5px 10px; background: #dbeafe; color: #1d4ed8; font-size: 12px; font-weight: 700; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 13px 10px; border-bottom: 1px solid var(--line); font-size: 14px; }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+    tr:last-child td { border-bottom: 0; }
+
+    .asset-tree { display: grid; gap: 10px; }
+    .asset {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+    }
+    .asset small { color: var(--muted); display: block; margin-top: 3px; }
+    .child { margin-left: 22px; }
+
+    .calc-list { display: grid; gap: 10px; }
+    .calc-row {
+      display: grid;
+      grid-template-columns: 1fr 90px 100px;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      align-items: center;
+    }
+    .calc-total {
+      margin-top: 12px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #eff6ff;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 900;
+      color: #1e3a8a;
+    }
+
+    .kanban { grid-template-columns: repeat(3, 1fr); }
+    .column { background: #f8fafc; border-radius: 16px; padding: 14px; border: 1px solid var(--line); }
+    .column h3 { margin: 0 0 12px; font-size: 15px; }
+    .ticket { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 13px; margin-bottom: 10px; font-size: 14px; }
+    .ticket small { display: block; color: var(--muted); margin-top: 6px; }
+
+    .view { display: none; }
+    .view.active { display: block; }
+
+    @media (max-width: 920px) {
+      .app { grid-template-columns: 1fr; }
+      aside { position: relative; height: auto; }
+      .stats, .two-col, .kanban { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="logo">
+        <div class="logo-mark">hw</div>
+        <div><strong>HWERP</strong><span>ERPNext Arbeitsoberfläche</span></div>
+      </div>
+      <nav>
+        <button class="active" data-view="dashboard">Dashboard</button>
+        <button data-view="customers">Kunden & Standorte</button>
+        <button data-view="assets">Assets</button>
+        <button data-view="calculation">Kalkulation</button>
+        <button data-view="kanban">Entwicklung</button>
+      </nav>
+      <div class="sidebar-note">
+        Demo ohne Backend. Alle Daten sind statisch im HTML enthalten und zeigen die Kernidee von HWERP.
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div>
+          <h1>HWERP Demo</h1>
+          <p class="subtitle">Zentrale Oberfläche für Kunden, Anlagen, Leistungen und Kalkulationen.</p>
+        </div>
+        <div class="actions">
+          <button class="btn secondary">Export</button>
+          <button class="btn">Neue Kalkulation</button>
+        </div>
+      </div>
+
+      <section id="dashboard" class="view active">
+        <div class="grid stats">
+          <div class="card"><div class="stat-label">Kunden</div><div class="stat-value">128</div><div class="stat-change">+8 diesen Monat</div></div>
+          <div class="card"><div class="stat-label">Assets</div><div class="stat-value">642</div><div class="stat-change">+31 erfasst</div></div>
+          <div class="card"><div class="stat-label">Offene Kalkulationen</div><div class="stat-value">19</div><div class="stat-change">€ 184.250 Pipeline</div></div>
+          <div class="card"><div class="stat-label">Materialartikel</div><div class="stat-value">2.418</div><div class="stat-change">Katalog aktiv</div></div>
+        </div>
+        <div class="grid two-col">
+          <div class="card">
+            <div class="section-title"><h2>Aktuelle Vorgänge</h2><span class="pill">Live Demo</span></div>
+            <table>
+              <thead><tr><th>Projekt</th><th>Kunde</th><th>Status</th><th>Wert</th></tr></thead>
+              <tbody>
+                <tr><td>Heizzentrale modernisieren</td><td>Müller GmbH</td><td><span class="pill">Kalkulation</span></td><td>€ 42.800</td></tr>
+                <tr><td>Wartung Lüftung Nord</td><td>Schmidt Immobilien</td><td><span class="pill">Angebot</span></td><td>€ 8.950</td></tr>
+                <tr><td>PV-Unterverteilung</td><td>Autohaus Kern</td><td><span class="pill">Planung</span></td><td>€ 17.400</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="section-title"><h2>Systemstatus</h2></div>
+            <div class="asset-tree">
+              <div class="asset">Frontend <small>React + Vite aktiv</small></div>
+              <div class="asset">Backend <small>Express API über /api</small></div>
+              <div class="asset">Datenhaltung <small>PostgreSQL Repository</small></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="customers" class="view">
+        <div class="card">
+          <div class="section-title"><h2>Kunden & Standorte</h2><span class="pill">CRM</span></div>
+          <table>
+            <thead><tr><th>Kunde</th><th>Standort</th><th>Ansprechpartner</th><th>Tags</th></tr></thead>
+            <tbody>
+              <tr><td>Müller GmbH</td><td>Werk 1, Berlin</td><td>Anna Müller</td><td>Industrie, Wartung</td></tr>
+              <tr><td>Schmidt Immobilien</td><td>Campus Nord</td><td>Leon Schmidt</td><td>Facility</td></tr>
+              <tr><td>Autohaus Kern</td><td>Hauptbetrieb</td><td>Mara Kern</td><td>Elektro, PV</td></tr>
+              <tr><td>Stadtwerke Süd</td><td>Pumpstation 4</td><td>R. Wagner</td><td>kritisch, SLA</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="assets" class="view">
+        <div class="grid two-col">
+          <div class="card">
+            <div class="section-title"><h2>Asset-Hierarchie</h2><span class="pill">Mehrstufig</span></div>
+            <div class="asset-tree">
+              <div class="asset">Gebäude A <small>Standort: Werk 1</small></div>
+              <div class="asset child">Heizzentrale <small>Typ: Technischer Raum</small></div>
+              <div class="asset child">Kessel 1 <small>Typ: Wärmeerzeuger · Baujahr 2019</small></div>
+              <div class="asset child">Pumpengruppe Nord <small>Typ: Hydraulik</small></div>
+              <div class="asset">Gebäude B <small>Standort: Werk 1</small></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="section-title"><h2>Asset-Typen</h2></div>
+            <table>
+              <tbody>
+                <tr><td>Wärmeerzeuger</td><td>37 Felder</td></tr>
+                <tr><td>Lüftungsanlage</td><td>28 Felder</td></tr>
+                <tr><td>Elektroverteilung</td><td>19 Felder</td></tr>
+                <tr><td>Pumpengruppe</td><td>16 Felder</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculation" class="view">
+        <div class="card">
+          <div class="section-title"><h2>Kalkulation: Heizzentrale modernisieren</h2><span class="pill">Angebot in Arbeit</span></div>
+          <div class="calc-list">
+            <div class="calc-row"><strong>1. Demontage Altanlage</strong><span>16 h</span><span>€ 1.360</span></div>
+            <div class="calc-row"><strong>1.1 Entsorgung</strong><span>pauschal</span><span>€ 780</span></div>
+            <div class="calc-row"><strong>2. Brennwertkessel 120 kW</strong><span>1 Stk.</span><span>€ 18.900</span></div>
+            <div class="calc-row"><strong>2.1 Montage & Inbetriebnahme</strong><span>42 h</span><span>€ 3.570</span></div>
+            <div class="calc-row"><strong>3. Fahrtblock</strong><span>automatisch</span><span>€ 640</span></div>
+          </div>
+          <div class="calc-total"><span>Gesamtsumme netto</span><span>€ 25.250</span></div>
+        </div>
+      </section>
+
+      <section id="kanban" class="view">
+        <div class="grid kanban">
+          <div class="column"><h3>Backlog</h3><div class="ticket">CSV-Import für Materialkatalog <small>Prio mittel</small></div><div class="ticket">Kontaktvererbung verbessern <small>Prio niedrig</small></div></div>
+          <div class="column"><h3>In Arbeit</h3><div class="ticket">Mehrere Asset-Ebenen in Kalkulation <small>Frontend</small></div><div class="ticket">Positionsstruktur einrücken <small>UX</small></div></div>
+          <div class="column"><h3>Erledigt</h3><div class="ticket">Automatische Fahrtblöcke <small>Release bereit</small></div><div class="ticket">PostgresRepo anbinden <small>Backend</small></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('nav button');
+    const views = document.querySelectorAll('.view');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(item => item.classList.remove('active'));
+        views.forEach(view => view.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(button.dataset.view).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

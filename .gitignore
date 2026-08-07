@@ -1,0 +1,66 @@
+# JavaScript/TypeScript
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/.vite/
+
+# Python/Frappe
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.ruff_cache/
+**/.mypy_cache/
+.venv/
+
+# Secrets and local deployment state
+.env
+.env.*
+!.env.example
+.npmrc
+.envrc
+sites/
+logs/
+**/site_config.json
+**/common_site_config.json
+**/private/
+**/backups/
+*.log
+*.sql.gz
+*.dump
+*.backup
+*.bak
+*.old
+*.orig
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.sqlite
+*.sqlite3
+*.db
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+.netrc
+.pypirc
+**/.aws/
+**/.azure/
+**/.kube/
+**/.config/gcloud/
+credentials.json
+service-account*.json
+
+# Local Hermes planning/session state
+.hermes/
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/

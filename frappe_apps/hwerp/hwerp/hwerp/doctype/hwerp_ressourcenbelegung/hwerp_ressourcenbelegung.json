@@ -1,0 +1,243 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "calculation",
+  "calculation_version",
+  "quotation",
+  "sales_order",
+  "company",
+  "customer",
+  "occupancy_type",
+  "status",
+  "resource_type",
+  "asset",
+  "resource_doctype",
+  "resource_name",
+  "resource_identifier",
+  "starts_at",
+  "ends_at",
+  "created_at",
+  "created_by_user",
+  "released_at",
+  "released_by",
+  "release_reason",
+  "collision_confirmed"
+ ],
+ "fields": [
+  {
+   "fieldname": "calculation",
+   "fieldtype": "Link",
+   "label": "Kalkulation",
+   "options": "HWERP Kalkulation",
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "calculation_version",
+   "fieldtype": "Int",
+   "label": "Kalkulationsversion",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "Angebot",
+   "options": "Quotation",
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "Kundenauftrag",
+   "options": "Sales Order",
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "search_index": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Kunde",
+   "options": "Customer",
+   "search_index": 1
+  },
+  {
+   "fieldname": "occupancy_type",
+   "fieldtype": "Select",
+   "label": "Belegungsart",
+   "reqd": 1,
+   "options": "Vormerkung\nReservierung",
+   "set_only_once": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "reqd": 1,
+   "default": "Aktiv",
+   "options": "Aktiv\nBeendet\nAufgehoben\nStorniert",
+   "search_index": 1,
+   "no_copy": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "resource_type",
+   "fieldtype": "Select",
+   "label": "Ressourcentyp",
+   "reqd": 1,
+   "set_only_once": 1,
+   "no_copy": 1,
+   "options": "ERPNext Asset\nHWERP Technikobjekt\nWiederverwendbares externes Mietmittel",
+   "search_index": 1
+  },
+  {
+   "fieldname": "asset",
+   "fieldtype": "Link",
+   "label": "ERPNext Asset",
+   "options": "Asset",
+   "set_only_once": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "resource_doctype",
+   "fieldtype": "Link",
+   "label": "HWERP-Ressourcentyp",
+   "options": "DocType",
+   "set_only_once": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "resource_name",
+   "fieldtype": "Dynamic Link",
+   "label": "HWERP-Ressource",
+   "options": "resource_doctype",
+   "set_only_once": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "resource_identifier",
+   "fieldtype": "Data",
+   "label": "Unveraenderliche Ressourcen-ID",
+   "reqd": 1,
+   "set_only_once": 1,
+   "no_copy": 1,
+   "search_index": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "starts_at",
+   "fieldtype": "Datetime",
+   "label": "Beginn",
+   "reqd": 1,
+   "search_index": 1,
+   "no_copy": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "ends_at",
+   "fieldtype": "Datetime",
+   "label": "Ende",
+   "reqd": 1,
+   "search_index": 1,
+   "no_copy": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "created_at",
+   "fieldtype": "Datetime",
+   "label": "Angelegt am",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "created_by_user",
+   "fieldtype": "Link",
+   "label": "Angelegt von",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "released_at",
+   "fieldtype": "Datetime",
+   "label": "Aufgehoben/beendet am",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "released_by",
+   "fieldtype": "Link",
+   "label": "Aufgehoben von",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "release_reason",
+   "fieldtype": "Small Text",
+   "label": "Aufhebungsgrund",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "collision_confirmed",
+   "fieldtype": "Check",
+   "label": "Kollision bestaetigt",
+   "default": "0",
+   "no_copy": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Ressourcenbelegung",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "HWERP Reservation Manager"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "hash",
+ "search_fields": "resource_identifier,calculation,quotation,sales_order"
+}

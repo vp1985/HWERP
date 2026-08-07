@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HWERP Mockup – Trafo-Lagerliste mit Selbstkosten</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #eef2f6;
+      color: #172033;
+      width: 100vw;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .poster { width: 1280px; height: 720px; margin: 0 auto; padding: 26px; display: grid; grid-template-columns: 1fr 390px; gap: 18px; transform-origin: top center; }
+    @media (max-height: 720px) { .poster { transform: scale(.8); } }
+    .shell, .panel { background: #fff; border: 1px solid #d9e1ec; border-radius: 22px; box-shadow: 0 20px 45px rgba(30,45,70,.10); overflow: hidden; }
+    .top { padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e7edf5; }
+    .title h1 { font-size: 23px; letter-spacing: -0.03em; }
+    .title p { color: #65758b; font-size: 13px; margin-top: 3px; }
+    .actions { display: flex; gap: 10px; }
+    button, .btn { border: 0; border-radius: 12px; padding: 10px 13px; font-weight: 700; font-size: 12px; cursor: pointer; }
+    .btn-primary { background: #166534; color: white; }
+    .btn-light { background: #edf3f8; color: #26364e; }
+    .toolbar { padding: 14px 22px; display: grid; grid-template-columns: 1.5fr repeat(4, auto); gap: 10px; align-items: center; background: #fbfcfe; border-bottom: 1px solid #e7edf5; }
+    .search, .select { background: #fff; border: 1px solid #d7e0ea; border-radius: 13px; padding: 10px 12px; color: #596a80; font-size: 12px; }
+    .summary { padding: 14px 22px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .metric { background: #f7f9fc; border: 1px solid #e0e7f0; border-radius: 16px; padding: 11px 12px; }
+    .metric strong { display: block; font-size: 19px; }
+    .metric span { color: #67778c; font-size: 11px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th { text-align: left; color: #637085; font-size: 11px; font-weight: 800; background: #f4f7fb; border-top: 1px solid #e7edf5; border-bottom: 1px solid #e7edf5; padding: 10px 12px; }
+    td { padding: 11px 12px; border-bottom: 1px solid #eef2f7; vertical-align: middle; }
+    tr.selected { background: #f0f9f3; }
+    .id { font-weight: 850; color: #0f5132; }
+    .muted { color: #65758b; }
+    .chip { display: inline-flex; border-radius: 999px; padding: 4px 8px; font-size: 11px; font-weight: 800; }
+    .ok { background: #dcfce7; color: #166534; } .warn { background: #fef3c7; color: #92400e; } .sold { background: #e0e7ff; color: #3730a3; } .dim { background: #eef2f7; color: #475569; }
+    .price-lock { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #94a3b8; }
+    .row-actions { display: flex; gap: 6px; }
+    .mini { padding: 7px 9px; border-radius: 10px; background: #eef6f0; color: #166534; font-size: 11px; }
+    .panel { display: flex; flex-direction: column; }
+    .panel-head { padding: 12px 16px 10px; background: linear-gradient(180deg,#0f5132,#166534); color: white; }
+    .panel-head .small { opacity: .78; font-size: 11px; margin-bottom: 3px; }
+    .panel-head h2 { font-size: 19px; letter-spacing: -.03em; }
+    .panel-head p { opacity: .82; font-size: 11px; margin-top: 3px; }
+    .tabs { display: flex; gap: 8px; padding: 8px 14px; border-bottom: 1px solid #e7edf5; }
+    .tab { flex: 1; text-align: center; background: #f1f5f9; border-radius: 11px; padding: 7px; font-weight: 850; font-size: 11px; color: #42526a; }
+    .tab.active { background: #dcfce7; color: #166534; }
+    .calc { padding: 11px 14px; overflow: hidden; }
+    .group { margin-bottom: 8px; }
+    .group.optional-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px; }
+    .group.optional-grid .group-title { grid-column: 1 / -1; }
+    .group.optional-grid .line { grid-template-columns: 1fr 58px; gap: 5px; }
+    .group.optional-grid .line label { font-size: 10px; line-height: 1.15; }
+    .group.optional-grid .amount { font-size: 10px; padding: 3px 5px; }
+    .group-title { font-size: 10px; font-weight: 900; color: #64748b; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; display: flex; justify-content: space-between; }
+    .line { display: grid; grid-template-columns: 1fr 82px; gap: 8px; align-items: center; padding: 4px 0; border-bottom: 1px dashed #e1e7ef; }
+    .line label { font-size: 11px; color: #26364e; }
+    .amount { background: #f8fafc; border: 1px solid #dce5ef; border-radius: 9px; padding: 4px 7px; text-align: right; font-weight: 750; font-size: 11px; }
+    .total { margin-top: 7px; border-radius: 14px; background: #172033; color: white; padding: 9px 11px; display: grid; grid-template-columns: 1fr auto; row-gap: 3px; font-size: 11px; }
+    .total strong { font-size: 15px; }
+    .note { margin-top: 7px; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px; padding: 8px; color: #9a3412; font-size: 10px; line-height: 1.25; }
+    .permission { display: flex; align-items: center; gap: 8px; margin: 8px 14px 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 8px; font-size: 11px; color: #475569; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; }
+  </style>
+</head>
+<body>
+  <main class="poster">
+    <section class="shell">
+      <div class="top">
+        <div class="title">
+          <h1>Trafo-Lagerliste</h1>
+          <p>Excel-Import über <b>Pos.</b> / HT-Nummer · technische Daten bleiben Importquelle</p>
+        </div>
+        <div class="actions">
+          <button class="btn-light">Excel importieren</button>
+          <button class="btn-primary">+ Trafo anlegen</button>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="search">🔎 Suche: HT0004, SGB, 1000 kVA, Seriennr…</div>
+        <div class="select">Status: alle</div>
+        <div class="select">Öl / Gießharz</div>
+        <div class="select">Preise: berechtigt</div>
+        <div class="select">Export</div>
+      </div>
+      <div class="summary">
+        <div class="metric"><strong>126</strong><span>Trafos gesamt</span></div>
+        <div class="metric"><strong>84</strong><span>lagernd/verfügbar</span></div>
+        <div class="metric"><strong>11</strong><span>reserviert</span></div>
+        <div class="metric"><strong>23</strong><span>verkauft</span></div>
+        <div class="metric"><strong>8</strong><span>ungeprüft</span></div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Pos.</th><th>Trafo</th><th>Technik</th><th>Zustand</th><th>Kunde/Verkauf</th><th>Selbstkosten</th><th>Aktion</th></tr>
+        </thead>
+        <tbody>
+          <tr class="selected"><td class="id">HT0004</td><td><b>SGB</b><br><span class="muted">Bj. 2018 · SN 18-4421</span></td><td>1.000 kVA<br><span class="muted">20/0,4 kV · Öl</span></td><td><span class="chip ok">Verfügbar</span></td><td class="muted">—</td><td><b>18.940 €</b><br><span class="muted">inkl. Aufbereitung</span></td><td><div class="row-actions"><span class="mini">Kalkulieren</span><span class="mini">Reservieren</span></div></td></tr>
+          <tr><td class="id">HT0012</td><td><b>Siemens</b><br><span class="muted">Bj. 2012 · SN 7462</span></td><td>630 kVA<br><span class="muted">10/0,4 kV · Öl</span></td><td><span class="chip warn">Reserviert</span></td><td>Meyer Bau<br><span class="muted">bis 30.06.</span></td><td><span class="price-lock">••••••</span><br><span class="muted">keine Preisrechte</span></td><td><div class="row-actions"><span class="mini">Öffnen</span></div></td></tr>
+          <tr><td class="id">HT0029</td><td><b>ABB</b><br><span class="muted">Bj. 2009 · SN A-901</span></td><td>400 kVA<br><span class="muted">20/0,4 kV · Gießharz</span></td><td><span class="chip sold">Verkauft</span></td><td>Elektro Nord<br><span class="muted">31.500 €</span></td><td><b>12.280 €</b></td><td><div class="row-actions"><span class="mini">Details</span></div></td></tr>
+          <tr><td class="id">HT0037</td><td><b>Trafo Union</b><br><span class="muted">Bj. 1998 · SN TU-38</span></td><td>1.600 kVA<br><span class="muted">20/0,69 kV · Öl</span></td><td><span class="chip dim">Ungeprüft</span></td><td class="muted">—</td><td><b>9.450 €</b></td><td><div class="row-actions"><span class="mini">Kalkulieren</span></div></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <aside class="panel">
+      <div class="panel-head">
+        <div class="small">Ausgewählt: HT0004 · SGB · 1.000 kVA</div>
+        <h2>Selbstkosten-Kalkulation</h2>
+        <p>Sichtbar nur für Rollen mit Preis-/Kalkulationsrecht.</p>
+      </div>
+      <div class="permission"><span class="dot"></span> Preisansicht aktiv · Einkauf & Marge sichtbar</div>
+      <div class="tabs"><div class="tab active">Selbstkosten</div><div class="tab">Verkauf</div><div class="tab">Historie</div></div>
+      <div class="calc">
+        <div class="group">
+          <div class="group-title"><span>Basis</span><span>pflicht</span></div>
+          <div class="line"><label>Einkaufspreis</label><div class="amount">12.500 €</div></div>
+          <div class="line"><label>Transportkosten</label><div class="amount">1.150 €</div></div>
+          <div class="line"><label>Abwicklungskosten</label><div class="amount">650 €</div></div>
+          <div class="line"><label>Auf- und Abladen</label><div class="amount">420 €</div></div>
+          <div class="line"><label>Einlagerung</label><div class="amount">280 €</div></div>
+          <div class="line"><label>Datenaufnahme / Inserat</label><div class="amount">190 €</div></div>
+        </div>
+        <div class="group optional-grid">
+          <div class="group-title"><span>Optionale Aufbereitung</span><span>bei Bedarf</span></div>
+          <div class="line"><label>Waschen</label><div class="amount">220 €</div></div>
+          <div class="line"><label>Elektrische Prüfung</label><div class="amount">690 €</div></div>
+          <div class="line"><label>Schleifen / Lackieren</label><div class="amount">1.300 €</div></div>
+          <div class="line"><label>Ölanalyse</label><div class="amount">180 €</div></div>
+          <div class="line"><label>Umbau auf Stecktechnik</label><div class="amount">950 €</div></div>
+          <div class="line"><label>Ölaufbereitung / Ölwechsel</label><div class="amount">1.050 €</div></div>
+          <div class="line"><label>Vakuumkammer</label><div class="amount">1.360 €</div></div>
+          <div class="line"><label>Provision Vermittlung</label><div class="amount">% / €</div></div>
+        </div>
+        <div class="total"><span>Selbstkosten gesamt</span><strong>18.940 €</strong><span>Verkaufspreis Ziel</span><strong>26.900 €</strong><span>Deckungsbeitrag</span><strong>7.960 €</strong></div>
+        <div class="note"><b>Namensvorschlag:</b> „Abwicklungskosten“ für Organisation, Telefonate, Angebotspflege, Terminierung, Koordination und Datenbankaufnahme. Alternativ: „Handlingkosten“.</div>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>

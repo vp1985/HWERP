@@ -1,0 +1,172 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "calculation",
+  "position_id",
+  "proposed_by",
+  "reviewer",
+  "currency",
+  "submitted_amount",
+  "reviewed_amount",
+  "status",
+  "submitted_at",
+  "reviewed_at",
+  "todo",
+  "review_comment",
+  "effective_price_applied"
+ ],
+ "fields": [
+  {
+   "fieldname": "calculation",
+   "fieldtype": "Link",
+   "label": "Kalkulation",
+   "options": "HWERP Kalkulation",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "position_id",
+   "fieldtype": "Data",
+   "label": "Positions-ID",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "proposed_by",
+   "fieldtype": "Link",
+   "label": "Vorgeschlagen von",
+   "options": "User",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "reviewer",
+   "fieldtype": "Link",
+   "label": "Preispruefer",
+   "options": "User",
+   "reqd": 1,
+   "set_only_once": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Waehrung",
+   "options": "Currency",
+   "reqd": 1,
+   "fetch_from": "calculation.currency",
+   "fetch_if_empty": 1,
+   "read_only": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "submitted_amount",
+   "fieldtype": "Currency",
+   "label": "Eingereichter Betrag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "reqd": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "reviewed_amount",
+   "fieldtype": "Currency",
+   "label": "Pruefbetrag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "reqd": 1,
+   "default": "Entwurf",
+   "options": "Entwurf\nEingereicht\nAngenommen\nAbgelehnt",
+   "search_index": 1,
+   "no_copy": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "submitted_at",
+   "fieldtype": "Datetime",
+   "label": "Eingereicht am",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "reviewed_at",
+   "fieldtype": "Datetime",
+   "label": "Geprueft am",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "todo",
+   "fieldtype": "Link",
+   "label": "Pruefaufgabe",
+   "options": "ToDo",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "review_comment",
+   "fieldtype": "Small Text",
+   "label": "Pruefkommentar",
+   "no_copy": 1,
+   "permlevel": 1
+  },
+  {
+   "fieldname": "effective_price_applied",
+   "fieldtype": "Check",
+   "label": "Als wirksamer Preis uebernommen",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Preisvorschlag",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "hash",
+ "search_fields": "calculation,position_id,status"
+}

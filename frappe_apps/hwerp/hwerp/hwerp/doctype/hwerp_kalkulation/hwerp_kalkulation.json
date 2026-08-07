@@ -1,0 +1,392 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "company",
+  "customer",
+  "project",
+  "responsible_user",
+  "status",
+  "currency",
+  "price_group",
+  "version_no",
+  "previous_version",
+  "root_calculation",
+  "is_sensitive",
+  "participants",
+  "main_objects",
+  "positions",
+  "risk_percent",
+  "target_margin",
+  "discount_input_type",
+  "discount_percent",
+  "discount_amount",
+  "cost_total",
+  "risk_amount",
+  "minimum_selling_price",
+  "target_selling_price",
+  "gross_selling_amount",
+  "net_selling_amount",
+  "partial_margin_amount",
+  "has_missing_labor_cost",
+  "notes",
+  "internal_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Bezeichnung",
+   "in_global_search": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "search_index": 1,
+   "set_only_once": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Kunde",
+   "options": "Customer",
+   "reqd": 1,
+   "search_index": 1,
+   "set_only_once": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Projekt",
+   "options": "Project",
+   "search_index": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "responsible_user",
+   "fieldtype": "Link",
+   "label": "Verantwortlicher Sachbearbeiter",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "reqd": 1,
+   "default": "Entwurf",
+   "options": "Entwurf\nFreigegeben\nStorniert",
+   "search_index": 1,
+   "no_copy": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Basiswaehrung",
+   "options": "Currency",
+   "reqd": 1,
+   "fetch_from": "company.default_currency",
+   "fetch_if_empty": 1,
+   "read_only": 1,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "price_group",
+   "fieldtype": "Link",
+   "label": "Kalkulations-Preisgruppe",
+   "options": "HWERP Kalkulationspreisgruppe",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "version_no",
+   "fieldtype": "Int",
+   "label": "Versionsnummer",
+   "reqd": 1,
+   "default": "1",
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "previous_version",
+   "fieldtype": "Link",
+   "label": "Vorgaengerversion",
+   "options": "HWERP Kalkulation",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "root_calculation",
+   "fieldtype": "Link",
+   "label": "Ursprungskalkulation",
+   "options": "HWERP Kalkulation",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "is_sensitive",
+   "fieldtype": "Check",
+   "label": "Teilnehmerzugriff beschraenken",
+   "default": "0",
+   "search_index": 1
+  },
+  {
+   "fieldname": "participants",
+   "fieldtype": "Table",
+   "label": "Teilnehmer",
+   "options": "HWERP Teilnehmer"
+  },
+  {
+   "fieldname": "main_objects",
+   "fieldtype": "Table",
+   "label": "Hauptobjekte",
+   "options": "HWERP Hauptobjekt"
+  },
+  {
+   "fieldname": "positions",
+   "fieldtype": "Table",
+   "label": "Kalkulationspositionen",
+   "options": "HWERP Kalkulationsposition"
+  },
+  {
+   "fieldname": "risk_percent",
+   "fieldtype": "Percent",
+   "label": "Angewendeter Risikopuffer",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "target_margin",
+   "fieldtype": "Percent",
+   "label": "Angewendete Zielmarge",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "discount_input_type",
+   "fieldtype": "Select",
+   "label": "Rabatteingabe",
+   "options": "Prozent\nBetrag",
+   "default": "Prozent",
+   "reqd": 1,
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "discount_percent",
+   "fieldtype": "Percent",
+   "label": "Rabatt",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Rabattbetrag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cost_total",
+   "fieldtype": "Currency",
+   "label": "Kostenbasis C",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "risk_amount",
+   "fieldtype": "Currency",
+   "label": "Risikobetrag R",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "minimum_selling_price",
+   "fieldtype": "Currency",
+   "label": "Mindestverkaufspreis M",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "target_selling_price",
+   "fieldtype": "Currency",
+   "label": "Zielverkaufspreis T",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "gross_selling_amount",
+   "fieldtype": "Currency",
+   "label": "Zeilensumme P",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "net_selling_amount",
+   "fieldtype": "Currency",
+   "label": "Netto-Endverkaufspreis F",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "partial_margin_amount",
+   "fieldtype": "Currency",
+   "label": "Teilkostenmarge G",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "has_missing_labor_cost",
+   "fieldtype": "Check",
+   "label": "Interne Arbeitskosten fehlen",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "Notizen"
+  },
+  {
+   "fieldname": "internal_notes",
+   "fieldtype": "Text",
+   "label": "Interne Notizen"
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Kalkulation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "HWERP Calculation User",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "HWERP Calculation Approver",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "HWERP Price Reviewer"
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "HWERP Price Reviewer"
+  },
+  {
+   "read": 1,
+   "role": "HWERP Price User"
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "HWERP Price User"
+  },
+  {
+   "read": 1,
+   "role": "HWERP Quotation Transfer"
+  },
+  {
+   "read": 1,
+   "role": "HWERP Submitted Quotation Editor"
+  },
+  {
+   "read": 1,
+   "role": "HWERP Item Creator"
+  },
+  {
+   "read": 1,
+   "role": "HWERP Item Price Manager"
+  },
+  {
+   "read": 1,
+   "role": "HWERP Participant Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:HWERP-KALK-{YYYY}-{#####}",
+ "title_field": "title",
+ "search_fields": "customer,project,status"
+}

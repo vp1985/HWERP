@@ -1,0 +1,234 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-07 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transfer",
+  "quotation",
+  "quotation_item_id",
+  "source_calculation",
+  "source_calculation_number",
+  "source_position_id",
+  "source_version",
+  "item",
+  "description",
+  "quantity",
+  "uom",
+  "currency",
+  "rate",
+  "amount",
+  "main_object_ids",
+  "object_snapshot",
+  "source_deleted",
+  "diverged",
+  "divergence_snapshot"
+ ],
+ "fields": [
+  {
+   "fieldname": "transfer",
+   "fieldtype": "Link",
+   "label": "Angebotsuebertragung",
+   "options": "HWERP Angebotsuebertragung",
+   "reqd": 1,
+   "set_only_once": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "Angebot",
+   "options": "Quotation",
+   "reqd": 1,
+   "set_only_once": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "quotation_item_id",
+   "fieldtype": "Data",
+   "label": "Angebotszeilen-ID",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "source_calculation",
+   "fieldtype": "Link",
+   "label": "Live-Link Kalkulation",
+   "options": "HWERP Kalkulation",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "source_calculation_number",
+   "fieldtype": "Data",
+   "label": "Kalkulationsnummer",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "source_position_id",
+   "fieldtype": "Data",
+   "label": "Positions-ID",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "source_version",
+   "fieldtype": "Int",
+   "label": "Kalkulationsversion",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Beschreibung",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "label": "Menge",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "Einheit",
+   "options": "UOM",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Waehrung",
+   "options": "Currency",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": "Uebertragener Satz",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Uebertragener Betrag",
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1,
+   "options": "currency",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "main_object_ids",
+   "fieldtype": "JSON",
+   "label": "Enthaltene Hauptobjekt-IDs",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "object_snapshot",
+   "fieldtype": "JSON",
+   "label": "Technischer Objektsnapshot",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1
+  },
+  {
+   "fieldname": "source_deleted",
+   "fieldtype": "Check",
+   "label": "Quelle geloescht",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "diverged",
+   "fieldtype": "Check",
+   "label": "Von Kalkulation abweichend",
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "divergence_snapshot",
+   "fieldtype": "JSON",
+   "label": "Abweichungs-Audit",
+   "read_only": 1,
+   "no_copy": 1,
+   "permlevel": 1,
+   "print_hide": 1,
+   "report_hide": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-07 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "HWERP",
+ "name": "HWERP Uebertragungsposition",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "hash",
+ "search_fields": "transfer,quotation,source_calculation_number,source_position_id"
+}
